@@ -1,4 +1,5 @@
 class Api::V1::UsersController < Api::V1::BaseController
+  before_action :authenticate_user, only: [:me]
 
   def create
     user = User.new(user_params)
@@ -7,6 +8,10 @@ class Api::V1::UsersController < Api::V1::BaseController
     else
       render json: user.errors, status: :unprocessable_entity
     end
+  end
+
+  def me
+    render json: UserSerializer.new(current_user).serialized_json
   end
 
   private

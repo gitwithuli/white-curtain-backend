@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       # devise_for :users, controllers: { sessions: 'sessions', registrations: 'api/v1/registrations' }
       post 'login' => 'user_token#create'
       resources :users, only: [:create]
+      get 'users/me', to: 'users#me'
       resources :movies, only: [ :index, :show ]do
         post 'follow' => 'movies#follow'
         delete 'unfollow' => 'movies#unfollow'
