@@ -11,7 +11,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   def me
-    render json: UserSerializer.new(current_user).serialized_json
+    render json: UserSerializer.new(current_user, {include: [:followed_movies, :followed_stars, :followed_genres]}).serialized_json
   end
 
   private

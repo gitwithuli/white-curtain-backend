@@ -25,6 +25,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 gem 'devise'
+gem 'omdb-api'
 gem 'simple_token_authentication'
 gem 'fast_jsonapi'
 gem "knock", github: "nsarno/knock", branch: "master",

@@ -5,6 +5,10 @@ class Api::V1::MoviesController < Api::V1::BaseController
     render json: MovieSerializer.new(Movie.all, {include: [:genre, :stars]}).serialized_json
   end
 
+  def show
+    render json: MovieSerializer.new(Movie.find(params[:id]), {include: [:genre, :stars]}).serialized_json
+  end
+
   def follow
     movie = Movie.find(params[:movie_id])
     current_user.followed_movies.push movie
