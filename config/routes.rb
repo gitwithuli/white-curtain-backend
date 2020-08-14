@@ -5,11 +5,13 @@ Rails.application.routes.draw do
       post 'login' => 'user_token#create'
       resources :users, only: [:create]
       get 'users/me', to: 'users#me'
+       get 'movies/recommendations', to: 'movies#get_recommendations'
 
       resources :movies, only: [ :index, :show ]do
         post 'follow' => 'movies#follow'
         delete 'unfollow' => 'movies#unfollow'
       end
+
 
       resources :genres, only: [ :index, :show ]do
         post 'follow' => 'genres#follow'
