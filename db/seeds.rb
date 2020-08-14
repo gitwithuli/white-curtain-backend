@@ -6,4 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+client = Omdb::Api::Client.new(api_key: [3f9073f5])
+
+require 'omdb/api'
+
 movie_titles = ["Star Wars",]
+
+movie_titles.each do |movie|
+
+end
