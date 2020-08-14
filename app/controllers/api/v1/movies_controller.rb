@@ -2,7 +2,11 @@ class Api::V1::MoviesController < Api::V1::BaseController
    before_action :authenticate_user, only: [:follow, :unfollow]
 
   def index
-    render json: MovieSerializer.new(Movie.all).serialized_json
+    render json: MovieSerializer.new(Movie.all, {include: [:genre, :stars]}).serialized_json
+  end
+
+  def show
+    render json: MovieSerializer.new(Movie.find(params[:id]), {include: [:genre, :stars]}).serialized_json
   end
 
   def follow

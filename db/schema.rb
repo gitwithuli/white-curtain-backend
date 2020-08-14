@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_09_115227) do
+ActiveRecord::Schema.define(version: 2020_08_14_100307) do
 
   create_table "follows", force: :cascade do |t|
     t.string "followable_type"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2020_08_09_115227) do
     t.integer "genre_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "poster"
     t.index ["genre_id"], name: "index_movies_on_genre_id"
   end
 
