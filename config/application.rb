@@ -43,3 +43,4 @@ module WhiteCurtainBackend
     config.api_only = true
   end
 end
+

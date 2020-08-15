@@ -5,13 +5,56 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Tmdb::Api.key("22a2bb8cb3aef7bd1580435c1b074b42")
 
-client = Omdb::Api::Client.new(api_key: [3f9073f5])
 
-require 'omdb/api'
+puts "Cleaning up the database...."
 
-movie_titles = ["Star Wars",]
+Genre.destroy_all
+Movie.destroy_all
+Star.destroy_all
 
-movie_titles.each do |movie|
+puts "DB cleaned....."
 
+puts "Creating Genres"
+genre_search = Tmdb::Genre.list
+genres = genre_search.flatten(2)
+genres.shift
+genres.each do |genre|
+  created_genres = Genre.create(
+  id: genre["id"],
+  name: genre["name"]
+  )
+  created_genres.save!
 end
+
+puts "Genres created!"
+
+puts "Creating a fresh batch of movies...."
+
+movies = Tmdb::Movie.top_rated
+
+movies.each do |movie|
+  genre_for_search = Tmdb::Movie.detail(movie.id)
+  genre_for_search.slice!("genres")
+  last_genre = genre_for_search["genres"]
+
+  created_movies = Movie.create(
+  id: movie.id,
+  title: movie.title,
+  year: movie.release_date,
+  description: movie.overview,
+  poster: movie.poster_path,
+  genre_id: last_genre[0]["id"]
+
+  )
+  created_movies.save!
+end
+# stars = Tmdb::Movie.top_rated.crew
+# stars.each do |star|
+#   created_stars = Star.create(
+#     name: star.name
+#     )
+#   created_stars.save!
+# end
+puts "Ended..."
