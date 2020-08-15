@@ -37,7 +37,8 @@ movies = Tmdb::Movie.top_rated
 movies.each do |movie|
   genre_for_search = Tmdb::Movie.detail(movie.id)
   genre_for_search.slice!("genres")
-  last_genre = genre_for_search["genres"]
+  almost_genre = genre_for_search["genres"]
+  last_genre = almost_genre[0]["id"]
 
   created_movies = Movie.create(
   id: movie.id,
@@ -45,11 +46,17 @@ movies.each do |movie|
   year: movie.release_date,
   description: movie.overview,
   poster: movie.poster_path,
-  genre_id: last_genre[0]["id"]
+  genre_id: last_genre
 
   )
   created_movies.save!
 end
+
+movie_ids = Movie.all.pluck(:id)
+movie_ids.each do |id|
+  star_search = Tmdb::Movie.detail(id)
+end
+
 # stars = Tmdb::Movie.top_rated.crew
 # stars.each do |star|
 #   created_stars = Star.create(
