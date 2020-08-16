@@ -115,9 +115,6 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
-    omdb-api (1.4.3)
-      activesupport
-      httparty
     orm_adapter (0.5.0)
     puma (4.3.5)
       nio4r (~> 2.0)
@@ -199,7 +196,6 @@ DEPENDENCIES
   fast_jsonapi
   knock!
   listen (~> 3.2)
-  omdb-api
   puma (~> 4.1)
   rack-cors
   rails (~> 6.0.3, >= 6.0.3.2)

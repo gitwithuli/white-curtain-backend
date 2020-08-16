@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'httparty'
 Tmdb::Api.key("22a2bb8cb3aef7bd1580435c1b074b42")
 
 
@@ -22,10 +23,9 @@ genres = genre_search.flatten(2)
 genres.shift
 genres.each do |genre|
   created_genres = Genre.create(
-  id: genre["id"],
-  name: genre["name"]
-  )
-  created_genres.save!
+    id: genre["id"],
+    name: genre["name"]
+    )
 end
 
 puts "Genres created!"
@@ -41,27 +41,29 @@ movies.each do |movie|
   last_genre = almost_genre[0]["id"]
 
   created_movies = Movie.create(
-  id: movie.id,
-  title: movie.title,
-  year: movie.release_date,
-  description: movie.overview,
-  poster: movie.poster_path,
-  genre_id: last_genre
+    id: movie.id,
+    title: movie.title,
+    year: movie.release_date,
+    description: movie.overview,
+    poster: movie.poster_path,
+    genre_id: last_genre
 
-  )
-  created_movies.save!
+    )
 end
 
-movie_ids = Movie.all.pluck(:id)
-movie_ids.each do |id|
-  star_search = Tmdb::Movie.detail(id)
-end
+puts "Movies created!"
+puts "Creating fresh batch of stars!"
 
-# stars = Tmdb::Movie.top_rated.crew
-# stars.each do |star|
-#   created_stars = Star.create(
-#     name: star.name
-#     )
-#   created_stars.save!
-# end
+movie_titles = Movie.all.pluck(:title)
+movie_titles.delete("Gabriel's Inferno Part II")
+movie_titles.each do |title|
+  url = "http://www.omdbapi.com/?t=#{title}&apikey=3f9073f5"
+  response = HTTParty.get(url)
+  json = JSON.parse(response.body)
+  star_search = json["Actors"].split(", ")
+  star_search.each do |star|
+    Star.create(
+      name: star )
+  end
+end
 puts "Ended..."
