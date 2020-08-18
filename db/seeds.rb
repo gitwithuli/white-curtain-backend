@@ -6,8 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'httparty'
+require 'dotenv-rails'
 
-Tmdb::Api.key(ENV[“MOVIE_API”])
+Tmdb::Api.key(ENV['MOVIE_API'])
 
 
 puts "Cleaning up the database...."
@@ -58,7 +59,7 @@ puts "Creating fresh batch of stars!"
 movie_titles = Movie.all.pluck(:title)
 movie_titles.delete("Gabriel's Inferno Part II")
 movie_titles.each do |title|
-  url = "http://www.omdbapi.com/?t=#{title}&apikey=#{ENV[“OMDB_API_KEY”]}"
+  url = "http://www.omdbapi.com/?t=#{title}&apikey=#{ENV['OMDB_API_KEY']}"
   response = HTTParty.get(url)
   json = JSON.parse(response.body)
   star_search = json["Actors"].split(", ")
