@@ -27,7 +27,7 @@ gem 'puma', '~> 4.1'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-gem 'dotenv-rails', :require => 'dotenv/rails-now', :groups => [:development, :test, :production]
+
 
 
 # Use Active Storage variant
@@ -40,12 +40,12 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors'
 gem 'devise'
 gem 'themoviedb', '~> 1.0', '>= 1.0.1'
-gem 'simple_token_authentication'
 gem 'fast_jsonapi'
 gem "knock", github: "nsarno/knock", branch: "master",
     ref: "9214cd027422df8dc31eb67c60032fbbf8fc100b"
 
 group :development, :test do
+  gem 'dotenv-rails', :require => 'dotenv/rails-now'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end

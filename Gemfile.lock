@@ -167,10 +167,6 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    simple_token_authentication (1.17.0)
-      actionmailer (>= 3.2.6, < 7)
-      actionpack (>= 3.2.6, < 7)
-      devise (>= 3.2, < 6)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -214,7 +210,6 @@ DEPENDENCIES
   rack-cors
   rails (~> 6.0.3, >= 6.0.3.2)
   rails_12factor
-  simple_token_authentication
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
