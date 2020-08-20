@@ -1,5 +1,4 @@
 class Api::V1::StarsController < Api::V1::BaseController
-   before_action :authenticate_user, only: [:follow, :unfollow]
 
   def index
     render json: StarSerializer.new(Star.all, {include: [:movies]}).serialized_json

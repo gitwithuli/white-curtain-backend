@@ -1,5 +1,4 @@
 class Api::V1::GenresController < Api::V1::BaseController
-   before_action :authenticate_user, only: [:follow, :unfollow]
 
   def index
     render json: GenreSerializer.new(Genre.all).serialized_json

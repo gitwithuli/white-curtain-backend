@@ -1,5 +1,5 @@
 class Api::V1::MoviesController < Api::V1::BaseController
-   before_action :authenticate_user, only: [:follow, :unfollow, :get_recommendations]
+
 
   def index
     render json: MovieSerializer.new(Movie.all, {include: [:genre, :stars]}).serialized_json
