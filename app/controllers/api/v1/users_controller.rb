@@ -1,4 +1,5 @@
 class Api::V1::UsersController < Api::V1::BaseController
+  before_action :authenticate_user, only: [:me]
 
   def create
     user = User.new(user_params)
@@ -9,6 +10,9 @@ class Api::V1::UsersController < Api::V1::BaseController
     end
   end
 
+  def me
+    render json: UserSerializer.new(current_user, {include: [:followed_movies, :followed_stars, :followed_genres]}).serialized_json
+  end
 
   private
 
